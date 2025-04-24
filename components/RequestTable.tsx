@@ -202,13 +202,7 @@ Thank you!
                           >
                             WhatsApp
                           </a>
-                          <button
-                            onClick={() => generateInvoice(req)}
-                            className="text-blue-300 underline hover:text-blue-200"
-                          >
-                            <FileText size={14} className="inline mr-1" />
-                            Invoice
-                          </button>
+                      
                         </td>
                       ) : key === "Phone-Number" ? (
                         <td key={key} className="px-3 py-1">
