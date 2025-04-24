@@ -40,27 +40,68 @@ const RequestTable = () => {
       <html>
         <head>
           <style>
-            body { font-family: Arial, sans-serif; margin: 20px; }
-            h1 { font-size: 24px; margin-bottom: 10px; }
-            p { font-size: 16px; margin-bottom: 8px; }
-            .invoice { border: 1px solid #ddd; padding: 20px; margin-bottom: 20px; }
-            .invoice p { font-size: 14px; margin: 4px 0; }
+            body { font-family: 'Arial', sans-serif; margin: 40px; color: #333; background-color: #f7f7f7; }
+            h1 { font-size: 28px; color: #2c3e50; margin-bottom: 20px; }
+            h2 { font-size: 24px; color: #16a085; margin-bottom: 10px; }
+            p { font-size: 16px; line-height: 1.6; margin-bottom: 15px; }
+            .invoice { border: 1px solid #e1e1e1; background-color: #fff; padding: 30px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); max-width: 800px; margin: 0 auto; }
+            .invoice-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; }
+            .invoice-header div { max-width: 200px; }
+            .invoice-header h2 { font-size: 32px; font-weight: bold; color: #16a085; }
+            .invoice-header p { font-size: 16px; margin-bottom: 8px; }
+            .invoice-detail { margin-top: 30px; }
+            .invoice-detail p { font-size: 18px; font-weight: 500; }
+            .invoice-detail div { margin-bottom: 12px; }
+            .footer { margin-top: 30px; text-align: center; color: #888; font-size: 14px; }
+            .invoice-table { width: 100%; margin-top: 30px; border-collapse: collapse; }
+            .invoice-table th, .invoice-table td { padding: 10px; border: 1px solid #ddd; text-align: left; }
+            .invoice-table th { background-color: #16a085; color: white; }
+            .invoice-table td { background-color: #fafafa; }
+            .btn { padding: 10px 20px; background-color: #16a085; color: white; border: none; border-radius: 5px; cursor: pointer; }
+            .btn:hover { background-color: #1abc9c; }
           </style>
         </head>
         <body>
           <div class="invoice">
-            <h1>Invoice</h1>
-            <p><strong>Customer:</strong> ${request["Customer-Name"]}</p>
-            <p><strong>Email:</strong> ${request["User-Email"]}</p>
-            <p><strong>Phone:</strong> ${request["Phone-Number"]}</p>
-            <p><strong>Address:</strong> ${request["Address"]}</p>
-            <p><strong>Product:</strong> ${
-              Array.isArray(request["Product-Name"])
-                ? request["Product-Name"].join(", ")
-                : request["Product-Name"]
-            }</p>
-            <p><strong>Quantity:</strong> ${request["Quantity"]}</p>
-            <p><strong>Time:</strong> ${new Date(request["Time"].seconds * 1000).toLocaleString()}</p>
+            <div class="invoice-header">
+              <div>
+                <h2>Invoice</h2>
+                <p><strong>Customer:</strong> ${request["Customer-Name"]}</p>
+                <p><strong>Email:</strong> ${request["User-Email"]}</p>
+                <p><strong>Phone:</strong> ${request["Phone-Number"]}</p>
+                <p><strong>Address:</strong> ${request["Address"]}</p>
+              </div>
+              <div>
+                <h2>Order Summary</h2>
+                <p><strong>Courier:</strong> ${request["Courier"]}</p>
+                <p><strong>Quantity:</strong> ${request["Quantity"]}</p>
+                <p><strong>Time:</strong> ${new Date(request["Time"].seconds * 1000).toLocaleString()}</p>
+              </div>
+            </div>
+
+            <div class="invoice-detail">
+              <p><strong>Products:</strong></p>
+              <div>${Array.isArray(request["Product-Name"]) ? request["Product-Name"].join(", ") : request["Product-Name"]}</div>
+            </div>
+
+            <table class="invoice-table">
+              <thead>
+                <tr>
+                  <th>Product</th>
+                  <th>Quantity</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>${Array.isArray(request["Product-Name"]) ? request["Product-Name"].join(", ") : request["Product-Name"]}</td>
+                  <td>${request["Quantity"]}</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <div class="footer">
+              <p>Thank you for your order!</p>
+            </div>
           </div>
           <script>
             window.print();
@@ -73,11 +114,9 @@ const RequestTable = () => {
 
   return (
     <>
-      {/* Main Page Content */}
       <div className="w-full">
         <h2 className="text-2xl font-bold text-gray-800 mb-6">User Requests</h2>
 
-        {/* Request Table */}
         <div className="overflow-x-auto bg-white shadow-lg rounded-2xl border border-gray-200">
           <table className="w-full text-sm text-gray-800 divide-y divide-gray-200">
             <thead className="bg-blue-500 text-white">
@@ -114,7 +153,7 @@ const RequestTable = () => {
                     <td className="px-3 py-2">
                       <button
                         onClick={() => handlePrintInvoice(request)}
-                        className="text-blue-600 hover:underline"
+                        className="text-white bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-lg"
                       >
                         Create Invoice
                       </button>
@@ -137,5 +176,6 @@ const RequestTable = () => {
 };
 
 export default RequestTable;
+
 
 
