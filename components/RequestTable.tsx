@@ -59,6 +59,7 @@ const RequestTable = () => {
             .invoice-table td { background-color: #fafafa; }
             .btn { padding: 10px 20px; background-color: #16a085; color: white; border: none; border-radius: 5px; cursor: pointer; }
             .btn:hover { background-color: #1abc9c; }
+            .invoice-icon { font-size: 24px; cursor: pointer; }
           </style>
         </head>
         <body>
@@ -151,12 +152,14 @@ const RequestTable = () => {
                       {new Date(request["Time"].seconds * 1000).toLocaleString()}
                     </td>
                     <td className="px-3 py-2">
-                      <button
+                      {/* Replace text button with an invoice icon */}
+                      <span
                         onClick={() => handlePrintInvoice(request)}
-                        className="text-white bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-lg"
+                        className="invoice-icon text-blue-600 cursor-pointer"
+                        title="Generate Invoice"
                       >
-                        Create Invoice
-                      </button>
+                        📄
+                      </span>
                     </td>
                   </tr>
                 ))
@@ -176,6 +179,3 @@ const RequestTable = () => {
 };
 
 export default RequestTable;
-
-
-
