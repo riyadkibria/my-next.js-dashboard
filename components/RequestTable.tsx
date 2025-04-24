@@ -19,7 +19,6 @@ interface RequestData {
 
 const RequestTable = () => {
   const [requests, setRequests] = useState<RequestData[]>([]);
-  const [selectedRequest, setSelectedRequest] = useState<RequestData | null>(null);
 
   useEffect(() => {
     const fetchRequests = async () => {
@@ -35,8 +34,6 @@ const RequestTable = () => {
   }, []);
 
   const handlePrintInvoice = (request: RequestData) => {
-    setSelectedRequest(request);
-
     // Manually trigger the print dialog with only the invoice content
     const printWindow = window.open('', '', 'width=600,height=600');
     printWindow?.document.write(`
@@ -140,4 +137,5 @@ const RequestTable = () => {
 };
 
 export default RequestTable;
+
 
