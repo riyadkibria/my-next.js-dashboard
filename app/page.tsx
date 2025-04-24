@@ -3,7 +3,6 @@
 import React from "react";
 import Sidebar from "../components/sidebar";
 import RequestTable from "../components/RequestTable"; // Import the RequestTable component
-import { generateInvoice } from "../utilsutils/invoiceGenerator";
 
 
 const DashboardPage = () => {
