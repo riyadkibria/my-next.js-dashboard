@@ -19,8 +19,6 @@ interface RequestData {
 
 const RequestTable = () => {
   const [requests, setRequests] = useState<RequestData[]>([]);
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [selectedInvoiceData, setSelectedInvoiceData] = useState<RequestData | null>(null);
 
   useEffect(() => {
     const fetchRequests = async () => {
@@ -34,11 +32,6 @@ const RequestTable = () => {
 
     fetchRequests();
   }, []);
-
-  const handleInvoiceClick = (request: RequestData) => {
-    setSelectedInvoiceData(request);
-    setIsModalOpen(true);
-  };
 
   return (
     <div className="w-full">
@@ -77,11 +70,8 @@ const RequestTable = () => {
                     {new Date(request["Time"].seconds * 1000).toLocaleString()}
                   </td>
                   <td className="px-3 py-2">
-                    <button
-                      onClick={() => handleInvoiceClick(request)}
-                      className="text-blue-600 hover:underline flex items-center gap-2"
-                    >
-                      <FaFileInvoice className="text-xl" /> Create Invoice
+                    <button className="text-blue-600 hover:underline">
+                      Create Invoice
                     </button>
                   </td>
                 </tr>
@@ -96,18 +86,8 @@ const RequestTable = () => {
           </tbody>
         </table>
       </div>
-
-      {/* Invoice Modal */}
-      {selectedInvoiceData && (
-        <InvoiceModal
-          data={selectedInvoiceData}
-          isOpen={isModalOpen}
-          onClose={() => setIsModalOpen(false)}
-        />
-      )}
     </div>
   );
 };
 
 export default RequestTable;
-
