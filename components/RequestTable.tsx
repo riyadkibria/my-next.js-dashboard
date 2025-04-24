@@ -1,4 +1,3 @@
-
 "use client";
 
 import React, { useEffect, useState } from "react";
@@ -42,8 +41,8 @@ const RequestTable = () => {
 
   return (
     <>
-      {/* Normal Page Content - hidden in print */}
-      <div className="print:hidden">
+      {/* Main Page Content */}
+      <div className="w-full">
         <h2 className="text-2xl font-bold text-gray-800 mb-6">User Requests</h2>
 
         {/* Request Table */}
@@ -102,7 +101,7 @@ const RequestTable = () => {
         </div>
       </div>
 
-      {/* Print-Only Invoice Section */}
+      {/* Print-Only Invoice Section - This will only show in print preview */}
       {selectedRequest && (
         <div className="hidden print:block p-10">
           <h1 className="text-2xl font-bold mb-4">Invoice</h1>
@@ -110,7 +109,6 @@ const RequestTable = () => {
           <p><strong>Email:</strong> {selectedRequest["User-Email"]}</p>
           <p><strong>Phone:</strong> {selectedRequest["Phone-Number"]}</p>
           <p><strong>Address:</strong> {selectedRequest["Address"]}</p>
-          <p><strong>Courier:</strong> {selectedRequest["Courier"]}</p>
           <p><strong>Product:</strong> {
             Array.isArray(selectedRequest["Product-Name"])
               ? selectedRequest["Product-Name"].join(", ")
